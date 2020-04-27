@@ -1,0 +1,21 @@
+<div id="poup-dock">
+<h3>More Details</h3>
+<div class="header-title">Client Details</div>
+<ul class="request-details">
+    <li>Client name : {{clientRequest?.first_name}} {{clientRequest?.last_name}}</li>
+<li>Client contact : {{clientRequest?.contact}}</li>
+<li>Client Address : {{clientRequest?.current_address}}</li>
+<li>Collected Time :  {{ clientRequest?.date_time | date:'medium' }}</li>
+</ul>
+<div  class="header-title">Receiver Details</div>
+<ul>
+    <li>Name : {{receiverDetails?.first_name}} {{receiverDetails?.last_name}}</li>
+    <li>Contact : {{receiverDetails?.contact}}</li>
+    <li>Address : {{receiverDetails?.address}}</li>
+
+</ul>
+<div align="right">
+    <button mat-button color="primary" (click)=" assignMe()" [mat-dialog-close]>ASSIGN ME</button>
+    <button mat-button color="primary" [mat-dialog-close] >CANCEL</button>
+</div>
+</div>

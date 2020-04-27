@@ -1,0 +1,166 @@
+<ion-content [fullscreen]="true">
+  <div  class="bar">
+   <div>
+    <div>
+      <div class="nave-button">
+        <button mat-mini-fab [routerLink]="['/client']">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+    </div>  
+  </div>
+  </div>
+  <div id="dock" align="center"> 
+    <ion-row>
+      <ion-col size="12">
+        <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Address
+              </mat-panel-title>
+              <mat-panel-description style="text-align: right;">
+                Your current address
+                <mat-icon>map</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div align="right" style="padding: 10px;">
+            <button mat-stroked-button color="warn" (click)="getLoc()">Refresh</button>
+          </div>
+              <div style="text-align: justify; text-shadow: black;">           
+        <span *ngFor = "let add of addresses">{{add}}<br></span>
+             </div>
+          
+
+             <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row> 
+          </mat-expansion-panel>
+       
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>                                  
+                  Delevery
+                </mat-panel-title>
+                <mat-panel-description>
+                  Your delevery
+                  <mat-icon>shopping_cart</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+            
+         
+           
+            <div> 
+          <mat-list>
+   
+            <mat-list-item *ngFor="let item of itemsDesc; let i = index" style="text-align: justify;">
+              <mat-icon mat-list-icon>swap_horizontal_circle</mat-icon> 
+              <button mat-mini-fab color="warn" (click)="removeItem(i)">-</button>
+              <h4 mat-line>{{item?.deleveryType}}</h4>
+              <p mat-line> {{item?.mesurmentType}} - {{item?.mesurmentValue}} {{item?.mesurment}}</p>
+              <p mat-line>{{item?.desc}}</p>
+            
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            
+          </mat-list>
+          </div>
+          <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">Previous</button>
+            <button mat-button color="primary" (click)="nextStep()">Next</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Receiver
+            </mat-panel-title>
+            <mat-panel-description>
+              Your receiver details
+              <mat-icon>swap_horiz</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+            
+         
+           
+            <div> 
+<form (ngSubmit)="sendReceiverDetails()">
+
+  <mat-form-field class="full-width">
+    <mat-label>Salutation</mat-label>
+    <select name ="salutation" matNativeControl required [(ngModel)]="receiverDetails.salutation" (selectionChange)="selectChangeHandler($event.value)">
+      <option value="Mr">Mr</option>
+      <option value="Miss">Miss</option>
+      <option value="Mrs">Mrs</option>
+      <option value="Rev">Rev</option>
+   </select>
+    </mat-form-field>
+           
+  <mat-form-field class="full-width">
+    <mat-label>First Name</mat-label>
+    <input matInput [(ngModel)]="receiverDetails.firstName" name="firstName" required>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Last Name</mat-label>
+    <input matInput [(ngModel)]="receiverDetails.lastName" name="lastName" required>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Contact Number</mat-label>
+    <input matInput type="tel"  [(ngModel)]="receiverDetails.contact" name="contact" required>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Address</mat-label>
+    <textarea matInput  [(ngModel)]="receiverDetails.address" name="address" required></textarea>
+  </mat-form-field><br>
+  <div align="right">
+       <button mat-flat-button color="warn" (click)="nextStep()">Submit</button>
+      </div>
+            </form>    
+          </div>
+          <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">Previous</button>
+            <button mat-button color="primary" (click)="nextStep()">Next</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                About Courier
+              </mat-panel-title>
+              <mat-panel-description>
+               Courier details
+                <mat-icon>error</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+           
+                  
+            <div> 
+          <p style="line-height: 40%; text-align: center; text-align: justify;" *ngFor ="let arg of courier_details">{{arg}}</p>  
+          
+
+          </div>
+          <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">Previous</button>
+            <button mat-button color="primary" (click)="nextStep()">Close</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+        </mat-accordion>
+        
+      </ion-col>
+     </ion-row>
+    </div>
+
+
+   
+  
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed"  >
+      <ion-fab-button color="warning" (click)="addDelevery()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+</ion-content>

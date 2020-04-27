@@ -1,0 +1,50 @@
+<ion-content [fullscreen]="true">
+  <mat-sidenav-container class="slide-bar-container">
+    <mat-sidenav #sidenav [mode]="mode.value">
+      <div class="sub-items-container">
+      <ion-toggle [(ngModel)]="checked" (ionChange)="statusClicked()"></ion-toggle><br/>
+      I'm Working
+    </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+   
+  <div class="bar">
+   <div>
+    <div>
+      <div class="nave-button">
+        <button mat-mini-fab (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span style="text-align: end; width: 180px !important; color: #ffff; font-size: 14px; background-color: #ffc30099; padding: 12px; border-radius: 5px;" > Hi {{CURRENT_USER?.first_name}}
+         
+        </span>
+       </div>      
+    </div>  
+  </div>
+  </div>
+<div id="dock">  
+  <ion-row>
+  <ion-col size="4">
+    <div align="center">
+    <span style="text-align: center;" class="style1">My Jobs</span><br/>
+    <button [routerLink]="['/courier/my-job']" style="background-image: url('../../assets/courier.svg'); background-size:cover;" mat-fab color="accent"></button>
+  </div>
+  </ion-col>
+  <ion-col size="4" >
+    <div align="center">
+    <span style="text-align: center;" class="style1">Transfer Jobs</span> 
+    <button [routerLink]="['/transfer-job']" style="background-image: url('../../assets/transfer.svg'); background-size:cover;" mat-fab color="accent"></button>
+  </div>
+  </ion-col>
+
+  <ion-col size="4" >
+    <div align="center">
+    <span style="text-align: center;" class="style1">Job Complete</span><br>
+    <button [routerLink]="['/job-complete']" style="background-image: url('../../assets/complete.svg'); background-size:cover;" mat-fab color="accent"></button>
+</div>
+  </ion-col>
+</ion-row>
+</div>
+</mat-sidenav-content>
+</mat-sidenav-container>
+</ion-content>

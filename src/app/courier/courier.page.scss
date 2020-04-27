@@ -1,0 +1,133 @@
+ion-content {
+    //--background: #fff url("../../assets/main-page.png") no-repeat center center / cover;
+    //z-index: 1;
+}
+.nave-button{
+    position: fixed;
+    z-index: 2;
+
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  #dock {
+    margin-top: 170px;
+
+overflow-y: scroll;;
+width: 100%;
+
+
+   
+   
+  }
+
+
+  .bar{
+    background-image: url("../../assets/main-page.png");
+    background-repeat: no-repeat;
+    background-position: unset;
+    background-size: cover;
+    position: fixed;
+    height: 200px;
+    width: 100%;
+    z-index: 1;
+    text-align: center;
+    }
+  
+
+
+
+  .request-form {
+    min-width: 150px;
+    max-width: 500px;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  .mat-stepper-vertical {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+  .your-details{
+    z-index: 10;
+      min-width: 100%;
+   margin-top: 20px;
+      font-size: 12px;
+      background-color: rgba($color: #FFB900, $alpha:1);
+      height: 200px;
+      border-radius: 5px;
+     padding: 10px;
+     text-align: left;
+     color: #fff;
+     line-height: 0.5cm;
+     overflow-y: scroll;
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+     
+  }
+
+
+  .full-width {
+    width: 100%;
+  }
+
+  .welcome{
+    background-color: rgba($color: #ffff, $alpha: 0.2);  
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 11px;
+    text-align: center;
+    width: 100%;
+    
+    }
+
+    #container {
+      display: flex;                 
+      flex-direction: row;           
+      flex-wrap: nowrap;              
+      justify-content: space-between; 
+     
+    }
+
+
+
+    .slide-bar-container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    .sub-items-container{
+      padding-left: 20px;
+      padding-right: 20px;
+      width: 220px;
+      padding-top: 30px;
+      background-image: url("../../assets/side-bar.png");
+      background-position: right;
+      background-size: unset;
+      height: 100%;
+    }
+    
+    

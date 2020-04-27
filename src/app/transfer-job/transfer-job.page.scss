@@ -1,0 +1,90 @@
+.bar{
+    background-image: url("../../assets/main-page.png");
+    background-repeat: no-repeat;
+    background-position: unset;
+    background-size: cover;
+    position: fixed;
+    height: 200px;
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+    }
+
+    .nave-button{
+        //position: fixed;
+        z-index: 2;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+    
+    #dock {
+    margin-top: 100px;
+    overflow-y: scroll !important;
+    width: 100%;  
+    }
+
+    #poup-dock {
+        overflow-y: scroll !important;
+        width: 100%;  
+        }
+
+    .card {
+        max-width: 95%;
+        padding: 10px !important;
+        margin: 10px;
+      }
+      
+      .header-image {
+        background-image: url('../../assets/document.svg');
+        background-size: cover;
+      }
+
+      .content.true{
+          overflow-y: scroll;
+          text-align: justify;
+          max-height: 200px;
+          text-align: left;
+      }
+
+      .content.false{
+        visibility: hidden;
+    }
+    .request-details{
+       text-align: left;
+    }
+
+    .block{
+        border: #D3D3D3 2px;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+       
+    }
+
+    .header-title{
+        color:#FFFFFF;
+        width: 100%;
+        padding: 5px;;
+        font-size: 14px;
+        background-color: #A5A5A7;
+        border-radius: 5px;;
+    }
+    li{
+        color:#4E4E4D;
+    }
+
+    
+    @media screen and (min-height: 480px) {
+       
+        div#main {
+            font-size: 3vw;
+            background-color: tomato;
+            color: springgreen;
+            height: 100%;
+            width: 100%;
+        }
+    
+    }

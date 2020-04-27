@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Add your delevery item</h1>
+<div mat-dialog-content>
+ 
+  
+
+
+
+    <mat-form-field class="full-width">
+      <mat-label>Delevery Type</mat-label>
+      <select matNativeControl required [(ngModel)]="selectedValue" (change)="deleveryTypeChange()"  [(ngModel)]="data.deleveryType">
+        <option  *ngFor="let item of ListItems" [value]="item.item_value">{{item.display_name}}</option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Mesurment Type</mat-label>
+      <select matNativeControl required [(ngModel)]="MesurSelectedValue" (change)="mesurementTypeChange()" [(ngModel)]="data.mesurmentType">
+        <option  *ngFor="let types of MesureType" [value]="types.type">{{types.type}}</option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Mesurment</mat-label>
+      <select  matNativeControl required [(ngModel)]="GradingSelectedValue"  [(ngModel)]="data.mesurment">
+        <option *ngFor="let mt of GradingsType" [value]="mt">{{mt}}</option>
+      </select>
+ </mat-form-field>
+   
+    <mat-form-field class="full-width">
+      <mat-label>Value</mat-label>
+      <input matInput type="number" [(ngModel)]="data.mesurmentValue">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Descprition</mat-label>
+      <textarea matInput  [(ngModel)]="data.desc"></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">CANCEL</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>OK</button>
+</div>
+

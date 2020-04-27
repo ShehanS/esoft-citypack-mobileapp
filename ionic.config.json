@@ -1,5 +1,7 @@
 {
   "name": "citipack",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

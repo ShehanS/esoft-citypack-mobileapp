@@ -1,0 +1,130 @@
+<ion-header [translucent]="true">
+ 
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg">
+  <ion-header collapse="condense">
+    
+</ion-header>
+ 
+
+
+  <mat-vertical-stepper [linear]="isLinear" #stepper1>
+    <mat-step [stepControl]="userFormGroup">
+      <form [formGroup]="userFormGroup" (ngSubmit)="getUserDetails()"  class="create-form">
+        <ng-template matStepLabel>Fill your details</ng-template>
+        
+        <mat-form-field>
+          <mat-label>Salutation</mat-label>
+          <select formControlName="salutation" [(ngModel)]="salutation" matNativeControl class="create-form" required>
+            <option value="Mr">Mr</option>
+            <option value="Miss">Miss</option>
+            <option value="Rev">Rev</option>
+            
+          </select>
+        </mat-form-field>
+        <br>
+      
+          <mat-form-field class="input-full-width">
+            <mat-label>First Name</mat-label>
+            <input formControlName="firstName" [(ngModel)] = "firstName" matInput placeholder="" value="" required>
+          </mat-form-field>
+
+          <mat-form-field class="input-full-width">
+            <mat-label>Last Name</mat-label>
+            <input formControlName="lastName" [(ngModel)] = "lastName" matInput placeholder="" value="" >
+          </mat-form-field>
+      
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <select formControlName="gender" [(ngModel)] = "gender" matNativeControl class="create-form" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+           </select>
+        </mat-form-field>
+       
+        <mat-form-field class="input-full-width">
+          <mat-label>Age</mat-label>
+          <input formControlName="age" [(ngModel)] = "age" type="number" matInput placeholder="" value="">
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="email" formControlName="email">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Address</mat-label>
+          <input formControlName="address2" [(ngModel)] = "address2" matInput placeholder="" required/>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>City</mat-label>
+          <input formControlName="city" [(ngModel)] = "city" matInput placeholder=""/>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>State</mat-label>
+          <input formControlName="state" [(ngModel)] = "state" matInput placeholder=""/>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <mat-label>Postal Code</mat-label>
+          <input formControlName="postalCode" [(ngModel)] = "postalCode" matInput placeholder=""/>
+        </mat-form-field>
+
+        
+        <mat-form-field class="input-full-width">
+          <mat-label>NIC/Passport</mat-label>
+          <input formControlName="nicOrPass" [(ngModel)] = "nicOrPass" matInput placeholder="" required>
+        </mat-form-field>
+        
+        <mat-form-field class="input-full-width">
+          <mat-label>Telephone</mat-label>
+          <span matPrefix>+94 &nbsp;</span>
+          <input type="tel" formControlName="contact" [(ngModel)] = "contact"  matInput placeholder="555-555-1234" required>
+          
+        </mat-form-field>
+
+       
+        <div>
+          <button  mat-button type="submit" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="loginFormGroup">
+      <form [formGroup]="loginFormGroup" (ngSubmit)="getLoginDetails()">
+        <ng-template matStepLabel>User Login</ng-template>
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" [(ngModel)]="username"  placeholder=""  required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" [(ngModel)]="password"  placeholder=""  required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button type="submit" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        
+        <button mat-button (click)="createNewUser()">Create</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+
+</ion-content>

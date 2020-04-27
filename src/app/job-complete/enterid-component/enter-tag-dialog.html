@@ -1,0 +1,15 @@
+<div style="width: 100%;">
+    <h3>Manual Search</h3>
+    <br/>
+    <mat-form-field>
+        <mat-label>Enter QR ID</mat-label>
+        <input matInput type="text" [(ngModel)]="data.id">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">CANCEL</button>
+        <button mat-button [mat-dialog-close]="data.id" cdkFocusInitial>SEARCH</button>
+      </div>
+</div>

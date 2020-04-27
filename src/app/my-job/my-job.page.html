@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true">
+  <div class="bar">
+   <div>
+    <div>
+      <div class="nave-button">
+        <button mat-mini-fab [routerLink]="['/courier']">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+       </div>      
+    </div>  
+  </div>
+  </div>
+ <div id="dock" align="center">
+<div *ngFor="let job of jobs">
+  <mat-card class="job-card" *ngIf="jobs" >
+    <mat-card-header [routerLink]="['response', job.response_id]">
+      <div mat-card-avatar class="job-header-image"></div>
+      <mat-card-title>First Name : {{job.client_details.first_name}}</mat-card-title>
+      <mat-card-subtitle>Last Name : {{job.client_details.last_name}} <br/>
+        Contact : {{job.client_details.contact}}<br/>
+     Date : {{job.client_details.request_date}}<br/>
+     Status : {{job.courier_status}}
+    </mat-card-subtitle>
+     
+     
+    </mat-card-header>
+  
+    <mat-card-content>
+   
+    </mat-card-content>
+    <mat-card-actions>
+      <!--
+      <button mat-button (click)="courierAcceptUpdate(job.response_id)">ACCEPT</button>
+      -->
+      <button mat-button (click)="courierCancelUpdate(job.response_id)">CANCEL</button>
+    </mat-card-actions>
+  </mat-card>
+<br/>
+ 
+</div>
+ </div>
+</ion-content>

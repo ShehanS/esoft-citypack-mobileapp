@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+ 
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg">
+  <ion-header collapse="condense">
+    
+</ion-header>
+
+
+<div align="center" class="divForm">
+  <img src="../../assets/login.png"/>
+
+  </div>
+<ion-card class="card">
+  <ion-card-header>
+    <ion-card-subtitle>System </ion-card-subtitle>
+    <ion-card-title>Login <div #spinner style="visibility: hidden;" align="center"><ion-spinner name="crescent"></ion-spinner></div></ion-card-title>
+  </ion-card-header>
+ <ion-card-content>
+    <div align="center">
+      <form (ngSubmit)="logForm()">
+        <mat-form-field appearance="fill" class="input-full-width">
+          <mat-label>Username</mat-label>
+          <input matInput [(ngModel)]="userLogin.username" name="username" required>
+        </mat-form-field>
+        <br>
+        
+        <mat-form-field appearance="fill" class="input-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput [(ngModel)]="userLogin.password" name="password" [type]="hide ? 'password' : 'text'" required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field><br>
+        <mat-checkbox style="padding-right: 20px;" name="state" (change)="remberState()" [(ngModel)]="LoginRemember.state" >Remember me</mat-checkbox>
+        <button mat-raised-button color="accent" type="submit">Login</button>
+        </form>
+      </div>
+     </ion-card-content>
+</ion-card>
+<mat-label style="cursor:pointer;"> Create a new account</mat-label>
+</ion-content>

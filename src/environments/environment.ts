@@ -3,8 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  message: 'dev env'
 };
+
+export const SERVER_URL= 'http://192.168.8.100:9000';
 
 /*
  * For easier debugging in development mode, you can import the following file

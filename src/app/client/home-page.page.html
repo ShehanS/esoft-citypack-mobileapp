@@ -1,0 +1,49 @@
+<ion-content [fullscreen]="true">
+  <div  class="bar">
+   <div>
+    <div>
+      <div class="nave-button">
+        <button mat-mini-fab>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span style="text-align: end; width: 180px !important; color: #ffff; font-size: 14px; background-color: #ffc30099; padding: 12px; border-radius: 5px;" > Hi {{CURRENT_USER?.first_name}}</span>
+       </div>
+    </div>  
+  </div>
+  </div>
+
+
+  
+  <div id="dock">  
+     <ion-row>
+      <ion-col size="4">
+      <div align="center">
+       <span style="text-align: center;" class="style1">New Delevery</span>
+      <button [routerLink]="['new-delevery']" style="background-image: url('../../assets/courier.png'); background-size:cover;" mat-fab color="accent"></button>
+    </div>
+    </ion-col>
+    <ion-col size="4" >
+      <div align="center">
+      <span style="text-align: center;" class="style1">Find Delevery</span> 
+      <button [routerLink]="['/create-new-user']" style="background-image: url('../../assets/find.png'); background-size:cover;" mat-fab color="accent"></button>
+    </div>
+    </ion-col>
+
+    <ion-col size="4" >
+      <div align="center">
+      <span style="text-align: center;" class="style1">Your History</span><br>
+      <button style="background-image: url('../../assets/history.png'); background-size:cover;" mat-fab color="accent"></button>
+  </div>
+    </ion-col>
+  </ion-row>
+</div>
+
+  
+   
+   
+  
+
+  
+  
+  
+</ion-content>

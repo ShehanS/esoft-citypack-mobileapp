@@ -1,0 +1,19 @@
+.bg {
+    --ion-background-color: rgb(255,132,0) !important;
+    --ion-background-color: linear-gradient(0deg, rgba(255,132,0,1) 0%, rgba(198,55,55,1) 37%) !important;
+  }
+
+ 
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  .create-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .input-full-width {
+    width: 100%;
+  }

@@ -1,0 +1,73 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+
+.bg {
+  --ion-background-color: rgb(255,132,0) !important;
+  --ion-background-color: linear-gradient(0deg, rgba(255,132,0,1) 0%, rgba(198,55,55,1) 37%) !important;
+}
+
+.card {
+  --background:#FFFFFF;
+}
+
+.item {
+  --background: white;
+}
+
+.roundedInput {
+  --border-color: var(--ion-color-medium-shade);
+  --border-radius: 10px;
+  --border-width: 1px;
+  --box-shadow: 2px gray;
+  --highlight-height: 0;
+  --background: #f8f9fa;
+ }
+
+ .create-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+}
+
+.divForm{
+  margin-top:80px;;
+}
+
+textarea {
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  background-color: #fff;
+  font-size: 1.2em;
+  resize: none;
+  border: none;
+} 

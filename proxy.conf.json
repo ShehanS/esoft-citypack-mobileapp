@@ -1,0 +1,8 @@
+{
+    "\/api": {
+      "target": "const URL = 'http://192.168.8.101:9000/ ",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+  }

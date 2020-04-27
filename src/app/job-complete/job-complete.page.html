@@ -1,0 +1,75 @@
+<div class="bar">
+  <div>
+   <div>
+     <div class="nave-button">
+       <button mat-mini-fab [routerLink]="['/courier']">
+         <mat-icon>arrow_back</mat-icon>
+       </button>
+             <button style="background-image: url('../../assets/qr-icon.svg'); background-size:cover;" mat-fab color="accent" ion-long-press [interval]="400" (longPressed)="enterID()" (click)="scan()" ></button>
+             
+     </div>  
+ </div>
+ </div>
+ 
+ 
+ <div id="dock" align="center">
+  <mat-card class="card" style="background: rgb(255,255,255); background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 80%);">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>Job Complete</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content style="overflow-y: scroll !important; max-height: 98%; padding: 5px;">
+      <div class="header-title">Job Detaili</div>
+      <div *ngIf ="isAvalabel"  [ngClass]="loding ===true ? 'content.false' : 'content.true'">  
+     
+       <mat-card class="card" style="margin-bottom: 10px; margin-top: 5px;">
+        <mat-card-header>
+          <mat-card-subtitle>Receiver Detail</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ul class="request-details" *ngFor="let receiver of jobDetail?.receiver_details">
+            <li>Name : {{receiver?.first_name}} {{receiver.last_name}}</li>
+            <li>Address : {{receiver?.address}}</li>
+            <li>Contact : {{receiver?.contact}}</li>
+          </ul>
+        </mat-card-content>
+       
+      </mat-card>
+
+      <mat-card class="card" style="margin-bottom: 10px; margin-top: 5px;">
+        <mat-card-header>
+          <mat-card-subtitle>Packge Detail</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ul class="request-details" *ngFor="let packge of jobDetail?.delevery_items">
+            <li>Item : {{packge.deleveryType}}-{{packge.desc}}</li>
+          </ul>
+        </mat-card-content>
+       
+      </mat-card>
+
+      <mat-card class="card" style="margin-bottom: 10px; margin-top: 5px;">
+        <mat-card-header>
+          <mat-card-subtitle>Sender Detail</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ul class="request-details" *ngFor="let sender of senderDetail">
+            <li>Name : {{sender.first_name}} {{sender.last_name}}</li>
+            <li>Contact : {{sender.contact}}</li>
+            <li>Address : {{sender.current_address}}</li>
+            
+          </ul>
+        </mat-card-content>
+       
+      </mat-card>
+     
+ 
+  </div>
+    </mat-card-content>
+   
+  </mat-card>
+
+</div>
+</div>
+

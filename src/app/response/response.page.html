@@ -1,0 +1,59 @@
+<div class="bar">
+  <div>
+   <div>
+     <div class="nave-button">
+       <button mat-mini-fab [routerLink]="['/courier/my-job']">
+         <mat-icon>arrow_back</mat-icon>
+       </button>
+      </div>      
+   </div>  
+ </div>
+ </div>
+ <div id="dock" align="center">
+  <mat-card class="job-card">
+    <mat-card-header>
+      <div mat-card-avatar class="job-header-image"></div>
+      
+     <mat-card-title>First Name : {{jobDetails?.client_details.first_name}}</mat-card-title>
+      <mat-card-subtitle>Last Name : {{jobDetails?.client_details.last_name}} <br/>
+        Contact : {{jobDetails?.client_details.contact}}<br/>
+     Date : {{jobDetails?.client_details.request_date}}<br/>
+     Status : {{jobDetails?.courier_status}}
+    </mat-card-subtitle>
+     
+     
+    </mat-card-header>
+ 
+    <mat-card-content>
+    <div align="center">
+  <ngx-qrcode 
+  [qrc-element-type]="elementType" [qrc-value] = "qrData" qrc-class="my-code">
+
+</ngx-qrcode>
+<span>QR Code</span>
+</div>
+<span>Package Details</span>
+<ul *ngFor="let item of jobDetails?.client_details.delevery_items">
+  <li>{{item?.deleveryType}}-{{item?.mesurmentValue}} {{item?.mesurment}}</li>
+ </ul>
+
+ <span>Receiver Details</span>
+<ul *ngFor="let receiver of jobDetails?.client_details.receiver_details">
+  <li>{{receiver?.first_name}} {{receiver?.last_name}}</li>
+  <li>{{receiver?.address}}</li>
+  <li>{{receiver?.contact}}</li>
+ </ul>
+
+
+
+
+    </mat-card-content>
+    <mat-card-actions>
+    
+      <button mat-button  color="accent" (click)="courierAcceptUpdate()">COLLECT AND PRINT QR</button>
+      <button mat-button (click)="courierCancelUpdate()">CANCEL</button>
+    </mat-card-actions>
+  </mat-card>
+
+
+ </div>

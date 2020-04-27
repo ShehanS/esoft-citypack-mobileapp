@@ -1,0 +1,80 @@
+<ion-content>
+<div class="bar">
+  <div>
+   <div>
+     <div class="nave-button">
+       <button mat-mini-fab [routerLink]="['/courier']">
+         <mat-icon>arrow_back</mat-icon>
+       </button>
+             <button style="background-image: url('../../assets/qr-icon.svg'); background-size:cover;" mat-fab color="accent"  ion-long-press [interval]="400" (longPressed)="enterID()" (click)="scanCode()"></button>
+     </div>  
+ </div>
+ </div>
+ 
+ 
+ <div id="dock" align="center">
+  <mat-card class="card" style="background: rgb(255,255,255); background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 80%);">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>Job Detail</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content style="overflow-y: scroll !important; max-height: 98%; padding: 5px;">
+     <div *ngIf ="isAvalabel"  [ngClass]="loding ===true ? 'content.false' : 'content.true'">
+    
+
+       <div class="header-title">Client Detaili</div>
+
+       <mat-card style="margin-bottom: 10px; margin-top: 5px; width: 100%;">
+        <mat-card-header>
+        </mat-card-header>
+        <mat-card-content>
+          <ul class="request-details">
+            <li>Client name : {{clientRequest?.first_name}} {{clientRequest?.last_name}}</li>
+          </ul>
+        </mat-card-content>
+       
+      </mat-card>
+    <button mat-button color="primary" (click)="actionDialog()">More Action..</button>
+  </div>
+
+  <div *ngIf ="isAvalabel"  [ngClass]="loding ===true ? 'content.false' : 'content.true'">
+    <div class="header-title">Tracking Information</div>
+
+
+    <div style="overflow-y: scroll; max-height: 50vh;">
+    <mat-card class="card" *ngFor = "let courier of courierHistory" style="margin-bottom: 10px; margin-top: 5px;">
+      <mat-card-header>
+        <mat-card-subtitle>Station-{{courier?.app_type}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <ul class="request-details">
+          <li>Courier name : {{courier?.first_name}} {{courier?.last_name}}</li>
+          <li>Courier name : {{courier?.contact}}</li>
+          <li>Accept Time : {{courier?.date_time | date:'medium'}}</li>
+          <li>Status : {{courier?.tx_type}}</li>
+        </ul>
+      </mat-card-content>
+     
+    </mat-card>
+  </div>
+</div>
+
+    </mat-card-content>
+   
+  </mat-card>
+
+</div>
+
+
+</div>
+
+<ion-fab vertical="bottom" horizontal="end"  edge slot="fixed" style="margin-bottom: 50px;">
+  <ion-fab-button color="warning">
+    <ion-icon name="options"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="start">
+    <ion-fab-button><ion-icon name="arrow-undo"></ion-icon></ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+</ion-content>

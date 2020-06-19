@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'client/new-delevery',
-    loadChildren: () => import('./new-delevery/new-delevery.module').then( m => m.NewDeleveryPageModule)
+    loadChildren: () => import('./new-request/new-delevery.module').then( m => m.NewDeleveryPageModule)
   },
   {
     path: 'courier',  canActivate: [AuthGuardService],
@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'job-complete',
     loadChildren: () => import('./job-complete/job-complete.module').then( m => m.JobCompletePageModule)
+  },
+  {
+    path: 'client-history',
+    loadChildren: () => import('./client-history/client-history.module').then( m => m.ClientHistoryPageModule)
   }
   
 ];

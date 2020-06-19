@@ -1,0 +1,43 @@
+#dock {
+  margin-top: 170px;
+
+overflow-y: scroll;;
+width: 100%;
+
+
+ 
+ 
+}
+
+  .nave-button{
+    //position: fixed;
+    z-index: 2;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .bar{
+    background-image: url("../../assets/main-page.png");
+    background-repeat: no-repeat;
+    background-position: unset;
+    background-size: cover;
+    position: fixed;
+    height: 200px;
+    width: 100%;
+    z-index: 1;
+    text-align: center;
+    }
+
+    .job-card {
+      max-width: 400px;
+      padding: 20px;
+      text-align: justify;
+    }
+
+    .job-header-image {
+      background-image: url('../../assets/find.png');
+      background-size: cover;
+    }

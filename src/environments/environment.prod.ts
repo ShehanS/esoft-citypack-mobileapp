@@ -3,4 +3,4 @@ export const environment = {
   message: 'prod env'
 
 };
-export const SERVER_URL= 'http://13.82.182.71:9000';
+export const SERVER_URL= 'http://shehan-esoft.eastus.cloudapp.azure.com:9000';

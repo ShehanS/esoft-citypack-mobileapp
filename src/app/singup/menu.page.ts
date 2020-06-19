@@ -30,6 +30,7 @@ password: string;
 role:string;
 userLoginDetails: any;
 deviceInfo = null;
+messageBody={header:'', message:''}
  
   @ViewChild('stepper1', null) private userDetailStepper: MatStepper;
   
@@ -42,7 +43,7 @@ deviceInfo = null;
   ]);
 
   constructor(
-    private deviceService: DeviceDetectorService, public createAlert: AlertController, private RestClient: RESTServices,   private userFormBuilder: FormBuilder, private loginFormBuilder: FormBuilder) {
+    private deviceService: DeviceDetectorService, public createAlert: AlertController, private restService: RESTServices,   private userFormBuilder: FormBuilder, private loginFormBuilder: FormBuilder) {
   
     }
 
@@ -132,8 +133,10 @@ USER[role] = "client"
 USER[current_timestamp] = created_timestamp;
 USER[device]=this.deviceService.getDeviceInfo().userAgent;
 
-this.RestClient.newAccount(USER).then(res =>{
-console.log(res)
+this.restService.newAccount(USER).then(response =>{
+var object = JSON.stringify(response);
+var resJson = JSON.parse(object);
+this.createAccountAlert('Create Account', resJson.args5)
 });
     }
 
@@ -143,6 +146,16 @@ async presentAlert() {
   const alert = await this.createAlert.create({
     header: 'Input Error',
     message: 'Please fill required feilds',
+    buttons: ['OK']
+  });
+
+  await alert.present();
+}
+
+async createAccountAlert(header: string,message: string) {
+  const alert = await this.createAlert.create({
+    header: header,
+    message: message,
     buttons: ['OK']
   });
 

@@ -1,3 +1,4 @@
+<ion-content>
 <div class="bar">
   <div>
    <div>
@@ -73,3 +74,12 @@
 </div>
 </div>
 
+<ion-fab vertical="bottom" horizontal="end"  edge slot="fixed" style="margin-bottom: 50px;" *ngIf ="isAvalabel"  [ngClass]="loding ===true ? 'content.false' : 'content.true'">
+  <ion-fab-button color="warning">
+    <ion-icon name="options"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="start">
+    <ion-fab-button (click)="jobComplete()"><ion-icon name="checkmark-circle"></ion-icon></ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+</ion-content>

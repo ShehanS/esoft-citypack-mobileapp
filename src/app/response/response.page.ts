@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RESTServices } from '../rest/rest.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
@@ -9,6 +9,7 @@ import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { ToastController } from '@ionic/angular';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -27,12 +28,9 @@ export class ResponsePage implements OnInit {
   receiver: any;
   qrImageData: any;
   elementType: 'url' | 'canvas' | 'img' = 'canvas';
-  printObj = {
-    name : 'shehan',
-    desc: 'test'
-  }
+
   
-  constructor(private storage: Storage, private file: File, private fileOpener: FileOpener,
+  constructor(private router: Router, private toastController: ToastController, private storage: Storage, private file: File, private fileOpener: FileOpener,
     private platform: Platform, private route: ActivatedRoute, private restService: RESTServices, private barcodeScanner: BarcodeScanner, private base64ToGallery: Base64ToGallery) {
     this.responseID = route.snapshot.params['id'];
   
@@ -65,7 +63,8 @@ ngOnInit() {
   this.response.tx_type="in"
   this.restService.setCourierAcceptions(this.responseID, this.response).then(response =>{
     console.log(response)
-    
+    this.acceptToast();
+    this.router.navigate(['/courier/my-job/']);
     
   })
 
@@ -78,11 +77,7 @@ ngOnInit() {
    }
    
  courierCancelUpdate(){
-    this.response.courier_status="cancel";
-   this.restService.setCourierAcceptions(this.responseID, this.response).then(response =>{
-     console.log(response)
- 
-   })
+  this.router.navigate(['/courier/my-job/']);
    
   }
 
@@ -157,6 +152,14 @@ ngOnInit() {
     }
     
   
+  }
+
+  async acceptToast() {
+    const toast = await this.toastController.create({
+      message: 'Client request accepted.',
+      duration: 2000
+    });
+    toast.present();
   }
 
 

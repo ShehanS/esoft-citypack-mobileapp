@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MyJobPageRoutingModule } from './my-job-routing.module';
+import { ClientHistoryPageRoutingModule } from './client-history-routing.module';
 
-import { MyJobPage, CancelDialog } from './my-job.page';
+import { ClientHistoryPage } from './client-history.page';
 import { MaterialModule } from '../material.module';
 
 @NgModule({
@@ -15,13 +15,8 @@ import { MaterialModule } from '../material.module';
     FormsModule,
     IonicModule,
     MaterialModule,
-    MyJobPageRoutingModule
+    ClientHistoryPageRoutingModule
   ],
-  entryComponents: [
-    CancelDialog,
-    
-    
-  ],
-  declarations: [MyJobPage, CancelDialog],
+  declarations: [ClientHistoryPage]
 })
-export class MyJobPageModule {}
+export class ClientHistoryPageModule {}

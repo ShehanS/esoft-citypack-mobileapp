@@ -17,3 +17,34 @@
   .input-full-width {
     width: 100%;
   }
+
+  .bar{
+    background-image: url("../../assets/main-page.png");
+    background-repeat: no-repeat;
+    background-position: unset;
+    background-size: cover;
+    position: fixed;
+    height: 200px;
+    width: 100%;
+    z-index: 1;
+    text-align: center;
+    }
+
+    #dock {
+      margin-top: 170px;
+      display: flex;                  /* establish flex container */
+      flex-direction: row;            /* default value; can be omitted */
+      flex-wrap: nowrap;              /* default value; can be omitted */
+      justify-content: space-between; /* switched from default (flex-start, see below) */
+     
+    }
+
+    .nave-button{
+      //position: fixed;
+      z-index: 2;
+      margin-top: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+      display: flex;
+      justify-content: space-between;
+    }

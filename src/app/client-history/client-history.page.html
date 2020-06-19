@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true">
+  <div  class="bar">
+   <div>
+    <div>
+      <div class="nave-button">
+        <button mat-mini-fab [routerLink]="['/client']">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+              
+      </div>  
+    </div>  
+  </div>
+  </div>
+
+  <div id="dock" align="center">
+    <div>
+      <mat-card style="padding: 10px;margin-left: 10px; margin-right: 10px;" *ngFor="let h of history">
+        <mat-card-header>
+          <div mat-card-avatar class="job-header-image"></div>
+          <mat-card-title></mat-card-title>
+          <mat-card-subtitle>
+            <span>Job Details</span><br/>
+            <ul style="text-align: justify;">
+              <li>Date : {{h?.request_date}}</li>
+              <li>Name : {{h?.receiver_details[0]?.first_name}} {{h?.receiver_details[0]?.first_name}}</li>
+              <li>Contact : {{h?.receiver_details[0]?.contact}}</li>
+              <li>Address : {{h?.receiver_details[0]?.address}}</li>
+              <li>Satus : {{h?.status | uppercase }}</li>
+              <li>Time : {{h?.status_time | date:'medium' }}</li>
+             </ul>
+        </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    <br/>
+     
+    </div>
+     </div>

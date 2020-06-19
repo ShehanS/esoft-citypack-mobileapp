@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Cancel request</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>What is the reason </mat-label>
+    <select matNativeControl required [(ngModel)]="reason" (change)="selectReason()">
+      <option *ngFor= "let reject of rejectList" value="{{reject.reason}}">{{reject.reason}}</option>
+     
+    </select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="cancelling()">OK</button>
+</div>
+
+
+
+

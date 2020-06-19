@@ -4,6 +4,9 @@ import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Subscription, interval } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 @Component({
   selector: 'app-courier',
   templateUrl: './courier.page.html',
@@ -31,15 +34,21 @@ export class CourierPage implements OnInit {
     date_time:0,
     location_date:''
   }
+  configRequest={
+    token:"city-pack",
+    config_type:"list",
+    list_name:"reject_reason"
+  }
+
   requestStatusSubscription: Subscription
-  constructor(private restService: RESTServices, private geolocation: Geolocation, private storage : Storage) {
+  private backButtonSub: Subscription;
+  constructor(private localNotifications: LocalNotifications, private platform: Platform, private router: Router, private restService: RESTServices, private geolocation: Geolocation, private storage : Storage) {
     
  
    }
 
   ngOnInit() {
-    this.readStroage();
-      
+   
   }
 
 
@@ -52,7 +61,7 @@ export class CourierPage implements OnInit {
   
       if(this.updateStatus.status==true){
         console.log("Working start")
-      this.requestStatusSubscription = interval(5000).subscribe(r =>{
+      this.requestStatusSubscription = interval(10000).subscribe(r =>{
       this.sendLocation();
 
       });
@@ -136,5 +145,55 @@ export class CourierPage implements OnInit {
           console.log(response)
         })
     }
+    
+
+
+
+    logout(){
+      if(this.updateStatus.status==true){
+       this.requestStatusSubscription.unsubscribe();
+      }
+        this.storage.clear();
+        this.router.navigate(['/login']);
+        
+   
+    }
+
+    exit(){
+      navigator['app'].exitApp()
+    }
+
+
+    ionViewDidEnter() {
+      this.readStroage();
+      this.getConfiguration();
+      this.backButtonSub = this.platform.backButton.subscribeWithPriority(
+        10000,
+        () => {
+          if (window.confirm("Do you want to exit?")) {
+          navigator['app'].exitApp()
+          }
+        });
+    }
+    
+    ionViewWillLeave() {
+      if(this.updateStatus.status==true){
+        this.requestStatusSubscription.unsubscribe();
+       }
+    }
+
+
+ 
+
+
+    getConfiguration(){
+      this.restService.getConfig(this.configRequest).then(response =>{
+        this.storage.set("reject_reason", response);
+      })
+    }
+
+
+  
+
 
 }

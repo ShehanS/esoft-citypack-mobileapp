@@ -2,8 +2,19 @@
   <mat-sidenav-container class="slide-bar-container">
     <mat-sidenav #sidenav [mode]="mode.value">
       <div class="sub-items-container">
-      <ion-toggle [(ngModel)]="checked" (ionChange)="statusClicked()"></ion-toggle><br/>
-      I'm Working
+     
+
+      <mat-list>
+        <mat-list-item>
+          <ion-toggle [(ngModel)]="checked" (ionChange)="statusClicked()"></ion-toggle>
+          I'm Working
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item ><div (click) ="logout()">Logout</div></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><div (click) ="exit()" >Exit</div></mat-list-item>
+      </mat-list>
+
     </div>
     </mat-sidenav>
     <mat-sidenav-content>

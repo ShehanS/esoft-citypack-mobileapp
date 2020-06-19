@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 
 declare var google: any;
@@ -17,6 +18,7 @@ export class HomePagePage implements OnInit {
   CURRENT_USER: any;
   subscribe: any;
   private backButtonSub: Subscription;
+  mode = new FormControl('over');
   
   constructor(private router: Router, private platform: Platform, private storage: Storage, private nativeGeocoder: NativeGeocoder,private geolocation: Geolocation,) { 
     
@@ -53,7 +55,16 @@ ionViewWillLeave() {
   this.backButtonSub.unsubscribe();
 }
 
+logout(){
 
+    this.storage.clear();
+    this.router.navigate(['/login']);
+   
+}
+
+exit(){
+  navigator['app'].exitApp()
+}
   
   
 }

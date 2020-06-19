@@ -5,10 +5,27 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NavigationBar } from '@ionic-native/navigation-bar/ngx';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { timeout } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  animations: [
+    trigger('fadein', [
+      state('void', style({ opacity: 0 })),
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate('900ms ease-out', style({ opacity: 1 }))
+      ])
+    ]),
+    trigger('slidelefttitle', [
+      transition('void => *', [
+        style({ opacity: 0, transform: 'translateX(150%)' }),
+        animate('900ms 300ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 }, ))
+      ])
+    ])
+  ]
 })
 
  //login page S.E final project
@@ -19,7 +36,7 @@ export class HomePage implements OnInit  {
   lat:any=''
   lng:any=''
 
-  constructor(private navigationBar: NavigationBar, private alertController: AlertController,private loadingController: LoadingController,private geolocation: Geolocation,private router: Router, private storage: Storage, public loginAlert: AlertController, private RestClient: RESTServices) {
+  constructor(private navigationBar: NavigationBar, private alertController: AlertController,private loadingController: LoadingController,private geolocation: Geolocation,private router: Router, private storage: Storage, public loginAlert: AlertController, private restService: RESTServices) {
    
   }
 
@@ -118,7 +135,7 @@ remberState(){
      this.presentAlert();
     }else{
       loading.present();
-      this.RestClient.login(this.userLogin).then(res =>{
+      this.restService.login(this.userLogin).then(res =>{
         console.log(res);
         loading.dismiss();
        var jsonObject = JSON.stringify(res);
@@ -136,13 +153,13 @@ remberState(){
           this.LoginAlert.type="login";
           this.LoginAlert.alertHeader="Login";
           this.presentAlert();
-        }else if(response.account_state=="disiable"){
+        }else if(response.account_status=="deactive"){
           this.LoginAlert.error="err002";
-          this.LoginAlert.message="Your account is disiable!";
+          this.LoginAlert.message="Your account has been disiable!";
           this.LoginAlert.type="login";
           this.LoginAlert.alertHeader="Sorry";
           this.presentAlert();
-        }else if (response.role=="Courier"){
+        }else if ((response.role=="Courier")||(response.role=="courier")){
           this.currentUser.access_token=response.access_token;
           this.currentUser.user_id =  response.user_id;
           this.currentUser.role =  response.role;
@@ -156,7 +173,7 @@ remberState(){
           this.storage.set("rember_me", this.LoginRemember.state)
           this.router.navigate(['/courier']);
         
-          }else if (response.role=="Client"){
+          }else if((response.role=="client")||(response.role=="Client")){
           this.currentUser.access_token=response.access_token;
           this.currentUser.user_id =  response.user_id;
           this.currentUser.role =  response.role;
@@ -175,6 +192,9 @@ remberState(){
       });
     }
     
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
   }
   async presentAlert() {
     const alert = await this.loginAlert.create({

@@ -7,13 +7,14 @@ import { AlertController } from '@ionic/angular'
 import { HomePage } from './home.page';
 import { MaterialModule } from '../material.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([
+     RouterModule.forChild([
       {
         path: '',
         component: HomePage

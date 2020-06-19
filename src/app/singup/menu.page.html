@@ -1,14 +1,20 @@
-<ion-header [translucent]="true">
+<ion-content [fullscreen]="true">
+  <div  class="bar">
+   <div>
+    <div>
+      <div class="nave-button">
+        <button mat-mini-fab [routerLink]="['/login']">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+              
+      </div>  
+    </div>  
+  </div>
+  </div>
+
  
-</ion-header>
 
-<ion-content [fullscreen]="true" class="bg">
-  <ion-header collapse="condense">
-    
-</ion-header>
- 
-
-
+ <div id="dock"> 
   <mat-vertical-stepper [linear]="isLinear" #stepper1>
     <mat-step [stepControl]="userFormGroup">
       <form [formGroup]="userFormGroup" (ngSubmit)="getUserDetails()"  class="create-form">
@@ -101,30 +107,21 @@
     <mat-step [stepControl]="loginFormGroup">
       <form [formGroup]="loginFormGroup" (ngSubmit)="getLoginDetails()">
         <ng-template matStepLabel>User Login</ng-template>
-        <mat-form-field>
+        <mat-form-field class="input-full-width">
           <mat-label>Username</mat-label>
           <input matInput formControlName="username" [(ngModel)]="username"  placeholder=""  required>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="input-full-width">
           <mat-label>Password</mat-label>
-          <input type="password" matInput formControlName="password" [(ngModel)]="password"  placeholder=""  required>
+          <input type="password"  matInput formControlName="password" [(ngModel)]="password"  placeholder=""  required>
         </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button type="submit" matStepperNext>Next</button>
+        <div align="right">
+          <button mat-button matStepperPrevious>Back</button>           
+        <button mat-button (click)="createNewUser()">Create</button>
+      
         </div>
       </form>
     </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        
-        <button mat-button (click)="createNewUser()">Create</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
   </mat-vertical-stepper>
-
+</div>
 </ion-content>

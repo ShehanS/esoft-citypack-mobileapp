@@ -7,7 +7,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { MatSnackBar } from '@angular/material';
 import {formatDate} from '@angular/common';
 import { interval, Subscription, Observable} from 'rxjs';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -19,6 +18,7 @@ export interface DialogData {
   mesurment: string;
   mesurmentValue: number;
   desc: string;
+
 }
 //messagebox poups data properties
 export interface MessageBoxDialogData {
@@ -59,6 +59,7 @@ export class NewDeleveryPage implements OnInit {
   mesurment: string;
   mesurmentValue: number
   desc:string;
+  configList:any;
   deleveryItems=[];
   itemsDesc=[];
   CURRENT_USER;
@@ -87,24 +88,42 @@ export class NewDeleveryPage implements OnInit {
     delevery_items:[],
     receiver_details: {},
     device:'',
-    request_date:'',
+    request_date: '',
     date_time: 0
+  }
+
+  configRequest={
+    token:"city-pack",
+    config_type:"list",
+    list_name:"delevery_item"
   }
 
   
 
-  constructor(private toastController: ToastController, public messageDialog: MatDialog,private localNotifications: LocalNotifications, private deviceService: DeviceDetectorService, public dialog: MatDialog, private _formBuilder: FormBuilder,public alertController: AlertController,public loadingController: LoadingController,private geolocation: Geolocation,private router: Router, private storage: Storage, public loginAlert: AlertController, private restClient: RESTServices)  { 
+  constructor(private toastController: ToastController, public messageDialog: MatDialog, private localNotifications: LocalNotifications, private deviceService: DeviceDetectorService, public dialog: MatDialog, private _formBuilder: FormBuilder,public alertController: AlertController,public loadingController: LoadingController,private geolocation: Geolocation,private router: Router, private storage: Storage, public loginAlert: AlertController, private restService: RESTServices)  { 
     
   }
   ngOnInit() {
-    this.getLoc();
-    this.readStroage();
-   
+   this.getLoc();
+   this.readStroage();
+   this.getConfiguration();
  
   }
 
+
+
+
+
+getConfiguration(){
+  this.restService.getConfig(this.configRequest).then(response =>{
+    this.storage.set("config_list",response);
+  })
+}
+
+
+
   async ionViewDidEnter(){
-    console.log("View did enter")
+    this.getConfiguration(); 
     let savedRequest = await this.storage.get("request_status");  
     if (savedRequest==null){
      return false;
@@ -150,7 +169,7 @@ export class NewDeleveryPage implements OnInit {
         request_date: formatDate(new Date(), 'M/d/yyyy', 'en'),
         date_time: (new Date).getTime()
       }
-      this.restClient.requestDelevery(this.requestObject).then(res =>{
+      this.restService.requestDelevery(this.requestObject).then(res =>{
          if (res!=null){
           loading.dismiss()
           var response = JSON.stringify(res);
@@ -159,7 +178,7 @@ export class NewDeleveryPage implements OnInit {
           this.requestCompleteToast();
           this.status=false;
           this.notifactionStatus = false;
-          this.requestStatusSubscription = interval(5000).subscribe(r =>{
+          this.requestStatusSubscription = interval(1000).subscribe(r =>{
             this.getRequestStatus();
           });
         }    
@@ -198,7 +217,7 @@ export class NewDeleveryPage implements OnInit {
       console.log("===RELOAD RQUEST STATUS===")
     this.storage.get("request_status").then(request =>{
       this.requestID = request.request_id;
-      this.restClient.getRequestStatus(this.requestID).then(async res =>{
+      this.restService.getRequestStatus(this.requestID).then(async res =>{
         this.courier_details=[];
           var resJson = JSON.stringify(res);
           var JsonObject = JSON.parse(resJson);
@@ -290,6 +309,8 @@ export class NewDeleveryPage implements OnInit {
   
   }
 
+
+
   loadItemsForList(){
     this.itemsDesc=[];
     this.deleveryItems.forEach(element =>{
@@ -320,7 +341,7 @@ this.deleveryItems=[];
     var saveJson = JSON.stringify(savedRequest);
     var saveJsonObject = JSON.parse(saveJson);
     this.requestID = saveJsonObject.request_id;
-    let requestStatus = await this.restClient.getRequestStatus(saveJsonObject.request_id);
+    let requestStatus = await this.restService.getRequestStatus(saveJsonObject.request_id);
     var resJson = JSON.stringify(requestStatus);
     var JsonObject = JSON.parse(resJson);
     return new Promise (resolve =>{
@@ -351,7 +372,7 @@ this.deleveryItems=[];
       });
     await loading.present();
 
-    this.geolocation.getCurrentPosition({maximumAge: 1000, timeout: 5000, enableHighAccuracy: true }).then((resp) => {
+    this.geolocation.getCurrentPosition({maximumAge: 1000, timeout: 50000, enableHighAccuracy: true }).then((resp) => {
       // resp.coords.latitude
       // resp.coords.longitude
       //alert("r succ"+resp.coords.latitude)
@@ -360,7 +381,7 @@ this.deleveryItems=[];
       this.lat=resp.coords.latitude
       this.lng=resp.coords.longitude
       console.log(this.lat+"-"+this.lng);
-      this.restClient.getLocation(this.lat, this.lng).then( res =>{
+      this.restService.getLocation(this.lat, this.lng).then( res =>{
        var rawDataMap = JSON.stringify(res);
        var mapObj = JSON.parse(rawDataMap);
       // console.log(rawDataMap);
@@ -425,54 +446,37 @@ this.deleveryItems=[];
   templateUrl: 'add-delevery.html',
   styleUrls: ['./new-delevery.page.scss'],
 })
-export class AddingDelevery implements OnInit {
+export class AddingDelevery {
 
 
 
   jsonList;
   selectedValue: string;
   MesurSelectedValue: string;
- GradingSelectedValue: string;
+  GradingSelectedValue: string;
   MesureType=[];
   ListItems=[];
   GradingsType:any;
   DeleveryType=[];
-  appRequest={
-    token:"city-pack",
-    config_type:"list",
-    list_name:"delevery_item"
-  }
+
+
   
-  constructor(private RestClient: RESTServices,
+  constructor(private storage: Storage,
     public dialogRef: MatDialogRef<AddingDelevery>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-     
+       this.storage.get("config_list").then(items =>{
+      var obj = JSON.stringify(items);
+        this.jsonList = JSON.parse(obj);
+          this.jsonList.item_list.forEach(element => {
+          this.ListItems.push(element)
+         });
+      })
     }
 
   onNoClick(): void {
     this.dialogRef.close();
     
   }
-
-
-
-
-  ngOnInit(): void {
-    this.getConfig();
-  }
-
-getConfig(){
-  this.RestClient.getConfig(this.appRequest).then(res =>{
-    var obj = JSON.stringify(res);
-     this.jsonList = JSON.parse(obj);
-     this.jsonList.item_list.forEach(element => {
-     this.ListItems.push(element)
-    });
-
-  })
-
-
-}
 
 
   deleveryTypeChange(){

@@ -38,7 +38,8 @@ import { NavigationBar } from '@ionic-native/navigation-bar/ngx';
   declarations: [AppComponent],
   entryComponents: [],
 
-  imports: [IonicStorageModule.forRoot(), 
+  imports: [
+    IonicStorageModule.forRoot(), 
     DeviceDetectorModule.forRoot(),
     FormsModule,
     BrowserModule, 
